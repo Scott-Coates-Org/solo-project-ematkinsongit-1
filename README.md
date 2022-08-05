@@ -72,11 +72,9 @@ Go to the [milestones tab](../../milestone/1) to track your progress.
 
 ### Description
 
-**Required:** update [your repository](https://stackoverflow.com/questions/7757751/how-do-you-change-a-repository-description-on-github) with a short description of your project.
+An app with games that will help people with aphasia practice language connections.
 
 ### Mockups
-
-_View `README.md` to see how to replace me with mockups._
 
 | ![Balloons Mockup Before](/mockups/balloons-before.png) | ![Balloons Mockup After](/mockups/balloons-after.png) |
 | ------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
