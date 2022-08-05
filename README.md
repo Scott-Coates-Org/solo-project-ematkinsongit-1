@@ -68,7 +68,7 @@ Go to the [milestones tab](../../milestone/1) to track your progress.
 
 ### Public URL
 
-[Replace me with the link to your app's URL](https://aphasia-language-app.web.app/)
+[Public Link](https://aphasia-language-app.web.app/)
 
 ### Description
 
@@ -77,5 +77,5 @@ An app with games that will help people with aphasia practice language connectio
 ### Mockups
 
 | ![Balloons Mockup Before](/mockups/balloons-before.png) | ![Balloons Mockup After](/mockups/balloons-after.png) |
-| ------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+|  | | |
 | ![Verb Match Mockup](/mockups/verb-match.png)           | ![Can You Do Pie Mockup](/mockups/pie-do.png)         | ![Which words are Nouns Mockup](/mockups/nouns.png) |
