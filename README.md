@@ -79,5 +79,5 @@ Go to the [milestones tab](../../milestone/1) to track your progress.
 _View `README.md` to see how to replace me with mockups._
 
 | ![Balloons Mockup Before](/mockups/balloons-before.png) | ![Balloons Mockup After](/mockups/balloons-after.png) |
-| ------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
-| ![Verb Match Mockup](/mockups/verb-match.png)           | ![Can You Do Pie Mockup](/mockups/pie-do.png)         | ![Which words are Nouns Mockup](//mockups/nouns.png) |
+| ------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| ![Verb Match Mockup](/mockups/verb-match.png)           | ![Can You Do Pie Mockup](/mockups/pie-do.png)         | ![Which words are Nouns Mockup](/mockups/nouns.png) |
