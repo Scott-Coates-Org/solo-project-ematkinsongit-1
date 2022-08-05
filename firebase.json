@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "site": "aphasia-language-app",
     "public": "public",
     "ignore": [
       "firebase.json",
