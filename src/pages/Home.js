@@ -10,14 +10,14 @@ import VerbMatchGame from "./VerbMatchGame";
 const Home = () => {
   return (
     <div>
-      <p>Create an Account: </p>
+      {/* <p>Create an Account: </p>
       <CreateAccount />
       <p>Sign in with Email and Password: </p>
       <SignIn /> <p>OR</p> <Login />
       <DoVerbGame />
-      <NounGame />
+      <NounGame /> */}
       <PhraseGame />
-      <VerbMatchGame />
+      {/* <VerbMatchGame /> */}
     </div>
   );
 };
