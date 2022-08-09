@@ -1,0 +1,12 @@
+.reg{
+    background-color: aqua;
+}
+.isAnswer{
+    background-color: green;
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4em;
+}
