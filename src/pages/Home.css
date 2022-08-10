@@ -1,0 +1,13 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4em;
+}
+.btn{
+    height: 20%;
+    width: 30%;
+    background-color: aqua;
+border: 1px solid gray;
+margin-left: 2em;
+margin-right: 2em;}

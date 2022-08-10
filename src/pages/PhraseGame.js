@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "bootstrap";
-import { getFormLabelUtilityClasses } from "@mui/material";
+import { Button } from "reactstrap";
+import "./PhraseGame.css";
 
 const PhraseGame = () => {
   const [num, setNum] = useState("");
@@ -21,33 +21,62 @@ const PhraseGame = () => {
     "beside the sea",
   ];
   const colorListItems = fillerColors.map((color) => (
-    <button key={color} value={color} onClick={(e) => setColor(e.target.value)}>
+    <Button
+      className="bankbtn"
+      key={color}
+      value={color}
+      onClick={(e) => setColor(e.target.value)}
+    >
       {color}
-    </button>
+    </Button>
   ));
   const numberListItems = fillerNumbers.map((num) => (
-    <button key={num} value={num} onClick={(e) => setNum(e.target.value)}>
+    <Button
+      className="bankbtn"
+      key={num}
+      value={num}
+      onClick={(e) => setNum(e.target.value)}
+    >
       {num}
-    </button>
+    </Button>
   ));
   const nounListItems = fillerNouns.map((noun) => (
-    <button key={noun} value={noun} onClick={(e) => setNoun(e.target.value)}>
+    <Button
+      className="bankbtn"
+      key={noun}
+      value={noun}
+      onClick={(e) => setNoun(e.target.value)}
+    >
       {noun}
-    </button>
+    </Button>
   ));
   const verbListItems = fillerVerbs.map((verb) => (
-    <button key={verb} value={verb} onClick={(e) => setVerb(e.target.value)}>
+    <Button
+      className="bankbtn"
+      key={verb}
+      value={verb}
+      onClick={(e) => setVerb(e.target.value)}
+    >
       {verb}
-    </button>
+    </Button>
   ));
   const whereListItems = fillerWhere.map((where) => (
-    <button key={where} value={where} onClick={(e) => setWhere(e.target.value)}>
+    <Button
+      className="bankbtn"
+      key={where}
+      value={where}
+      onClick={(e) => setWhere(e.target.value)}
+    >
       {where}
-    </button>
+    </Button>
   ));
 
   return (
-    <div id="level">
+    <div className="level">
+      <h1>
+        Click the category and select the correct word from the wordbank.
+        Generate a phrase that matches the prompt.
+      </h1>
       <div id="wordAndImg" className="row">
         <p className="col-md-6">holds word bank and images</p>
 
@@ -55,11 +84,10 @@ const PhraseGame = () => {
           <ul>{bank}</ul>
         </div>
         <div className="col-md-6" id="lvlimg">
-          {" "}
-          Image from DB
+          <img src="../assets/kittens.jpeg" alt="kittens" />
         </div>
       </div>
-      <div id="answersholder">
+      <div className="answersholder">
         AnswersHolder
         <div
           id="num"
@@ -128,13 +156,13 @@ const PhraseGame = () => {
         {" "}
         Answer: {num} {color} {noun} {verb} {where}{" "}
       </p>
-      <button
+      <Button
         onClick={() => {
           console.log("submitted");
         }}
       >
         Submit
-      </button>
+      </Button>
     </div>
   );
 };
