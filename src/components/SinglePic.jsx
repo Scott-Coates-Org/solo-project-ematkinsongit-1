@@ -10,12 +10,10 @@ const SinglePic = (pair, verb, pathName) => {
     ref(storage, `${pair.pathName}`)
   );
   return ( <div> 
-    <h3>Hello World</h3>
    {error && <strong>Error: {error}</strong>}
         {loading && <span>Download URL: Loading...</span>}
         {!loading && value && (
           <div className='picDiv'>
-            <span>Download URL: {value}</span>
             <img className='innerPic' src={value}/>
           </div>
         )}
