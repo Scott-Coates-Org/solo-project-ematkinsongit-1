@@ -1,0 +1,14 @@
+.photodiv{
+   height: auto;
+   width: fit-content;
+    border: 1px solid gray;
+}
+.photo{
+    width:300px;
+    height: auto;
+}
+.draggable{
+    border: 1px solid gray;
+    background-color: aqua;
+    width: fit-content;
+cursor: move}
