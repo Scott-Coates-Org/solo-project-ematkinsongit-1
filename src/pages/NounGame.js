@@ -22,7 +22,7 @@ const NounGame = () => {
       pair={pair}
       word={pair.word}
       isAnswer={pair.isAnswer}
-      key={uuidv4()}
+      key={pair.word}
     />
   ));
 

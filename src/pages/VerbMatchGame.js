@@ -6,6 +6,8 @@ import SingleVerb from "../components/SingleVerb.jsx";
 import { uuidv4 } from "@firebase/util";
 
 const VerbMatchGame = () => {
+  const [draggingID, setDraggingID] = useState("");
+  const [dragOverID, setDragOverID] = useState("");
   const verbMatchData = [
     { verb: "drink", pathName: "verbmatch/setOne/drink.jpg" },
     { verb: "fly", pathName: "verbmatch/setOne/fly.jpg" },
@@ -15,43 +17,59 @@ const VerbMatchGame = () => {
     { verb: "swim", pathName: "verbmatch/setOne/swim.jpg" },
   ];
   const renderedVerbMatch = verbMatchData.map((pair) => (
-    <SingleVerb
-      draggable="true"
-      pair={pair}
-      verb={pair.verb}
-      pathName={pair.pathName}
-      key={uuidv4()}
-    />
-  ));
-  const renderedPictures = verbMatchData.map((pair) => {
-    return (
-      <SinglePic
-        onDragOver={(id) => handleDragOver(id)}
+    <div
+      id={pair.verb}
+      onDragStart={(id) => handleDragStart(id)}
+      onDragEnd={() => {
+        handleDragEnd();
+      }}
+      onClick={(e, id) => {
+        setDraggingID(e.target.id);
+        console.log(draggingID);
+      }}
+    >
+      <SingleVerb
         id={pair.verb}
+        key={pair.verb}
         pair={pair}
         verb={pair.verb}
         pathName={pair.pathName}
-        key={pair.verb}
       />
+    </div>
+  ));
+  const renderedPictures = verbMatchData.map((pair) => {
+    return (
+      <div onDragOver={(id) => handleDragOver(id)}>
+        <SinglePic
+          pair={pair}
+          key={pair.verb}
+          id={pair.verb}
+          verb={pair.verb}
+          pathName={pair.pathName}
+        />
+      </div>
     );
   });
   const handleDragStart = (e) => {
-    const target = e.target;
-    e.dataTransfer.setData("item_id", target.id);
+    setDraggingID(e.target.id);
+    console.log("dragging ID: ", draggingID);
   };
   const handleDragEnd = (e) => {
-    const item_id = e.dataTransfer.getData("item_id");
-    const item = document.getElementById(item_id);
-    e.target.appendChild(item);
+    console.log("drag ended");
   };
-  const handleDragOver = (id) => {
-    console.log("dragging over: ", id);
+  const handleDragOver = (e) => {
+    setDragOverID(e.target.id);
+    console.log("dragOverID: ", dragOverID);
   };
+  const appendToDiv = () => {};
   return (
-    <div>
-      <h1> Rendered Pictures List: </h1>
-      <p>{renderedPictures}</p>
-      <p>{renderedVerbMatch}</p>
+    <div className="verbMatch">
+      <h3> Match the verb to the correct picture by dragging and dropping.</h3>
+      <div className="picturesBox">{renderedPictures}</div>
+      <div className="verbsBox">
+        <h5>Word Bank: </h5>
+        {renderedVerbMatch}
+      </div>
     </div>
   );
 };

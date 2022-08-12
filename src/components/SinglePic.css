@@ -1,9 +1,0 @@
-.picDiv {
-    width: 300px;
-    height: 500px;
-}
-
-.innerPic {
-    max-width: 100%;
-    object-fit: contain;
-}

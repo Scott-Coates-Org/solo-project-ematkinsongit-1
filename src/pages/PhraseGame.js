@@ -12,7 +12,7 @@ const PhraseGame = () => {
   const [bank, setBank] = useState([]);
   const fillerColors = ["red", "yellow", "blue"];
   const fillerNumbers = ["one", "two", "three", "four"];
-  const fillerNouns = ["peach", "balloon", "tree", "bird"];
+  const fillerNouns = ["peach", "balloon", "trees", "birds"];
   const fillerVerbs = ["running", "jumping", "floating", "peeing"];
   const fillerWhere = [
     "in a tree",
@@ -72,97 +72,83 @@ const PhraseGame = () => {
   ));
 
   return (
-    <div className="level">
-      <h1>
-        Click the category and select the correct word from the wordbank.
-        Generate a phrase that matches the prompt.
-      </h1>
-      <div id="wordAndImg" className="row">
-        <p className="col-md-6">holds word bank and images</p>
-
-        <div className="col-md-6" id="wordBank">
-          <ul>{bank}</ul>
-        </div>
-        <div className="col-md-6" id="lvlimg">
-          <img src="../assets/kittens.jpeg" alt="kittens" />
-        </div>
-      </div>
-      <div className="answersholder">
-        AnswersHolder
-        <div
-          id="num"
-          className="row"
-          onClick={() => {
-            setBank(numberListItems);
-          }}
-        >
-          {" "}
-          <p className="col-md-6">Number = </p>
-          <div className="col-md-6" id="numans">
-            {num}
+    <div className="main">
+      <div className="level">
+        <h1>
+          Click the category and select the correct word from the wordbank.
+          Generate a phrase that matches the prompt.
+        </h1>
+        <div id="wordAndImg" className="">
+          <div className="lvlimg" id="lvlimg">
+            <img src="../assets/kittens.jpeg" alt="kittens" />
+          </div>
+          <div className="wordBank" id="wordBank">
+            <h3>Word Bank</h3>
+            <ul>{bank}</ul>
           </div>
         </div>
-        <div
-          className="row"
-          id="color"
-          onClick={() => {
-            setBank(colorListItems);
-          }}
-        >
-          {" "}
-          <p className="col-md-6">Color = </p>
-          <div className="col-md-6" id="colorans">
-            {color}
+        <div className="answersholder">
+          AnswersHolder
+          <div
+            id="num"
+            className="row"
+            onClick={() => {
+              setBank(numberListItems);
+            }}
+          >
+            {" "}
+            <p className="">Number = {num}</p>
           </div>
-        </div>
-        <div
-          className="row"
-          id="noun"
-          onClick={() => {
-            setBank(nounListItems);
-          }}
-        >
-          <p className="col-md-6">Noun = </p>
-          <div className="col-md-6" id="nounans">
-            {noun}
+          <div
+            className="row"
+            id="color"
+            onClick={() => {
+              setBank(colorListItems);
+            }}
+          >
+            {" "}
+            <p className="">Color = {color}</p>
           </div>
-        </div>
-        <div
-          className="row"
-          id="verb"
-          onClick={() => {
-            setBank(verbListItems);
-          }}
-        >
-          <p className="col-md-6">Verb = </p>
-          <div className="col-md-6" id="verbans">
-            {verb}
+          <div
+            className="row"
+            id="noun"
+            onClick={() => {
+              setBank(nounListItems);
+            }}
+          >
+            <p className="">Noun = {noun}</p>
           </div>
-        </div>
-        <div
-          className="row"
-          id="where"
-          onClick={() => {
-            setBank(whereListItems);
-          }}
-        >
-          <p className="col-md-6">Where = </p>
-          <div className="col-md-6" id="whereans">
-            {where}
+          <div
+            className="row"
+            id="verb"
+            onClick={() => {
+              setBank(verbListItems);
+            }}
+          >
+            <p className="">Verb = {verb}</p>
           </div>
+          <div
+            className="row"
+            id="where"
+            onClick={() => {
+              setBank(whereListItems);
+            }}
+          >
+            <p className="">Where = {where}</p>
+          </div>{" "}
         </div>{" "}
-      </div>{" "}
-      <p>
-        {" "}
-        Answer: {num} {color} {noun} {verb} {where}{" "}
-      </p>
-      <Button
-        onClick={() => {
-          console.log("submitted");
-        }}
-      >
-        Submit
-      </Button>
+        <p>
+          {" "}
+          Answer: {num} {color} {noun} {verb} {where}
+        </p>
+        <Button
+          onClick={() => {
+            console.log("submitted");
+          }}
+        >
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };
