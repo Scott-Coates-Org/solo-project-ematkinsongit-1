@@ -1,6 +1,7 @@
 
 .main {
     background-color: rgb(244, 248, 249);
+
     display: flex;
     justify-content: center;
 }
@@ -10,7 +11,8 @@
     justify-content: center;
 }
 .level{ 
-    margin: 2em;
+    width: 75%;
+    margin: auto;
     justify-content: center;
 }
 .wordBank{
@@ -23,6 +25,8 @@
 }
 .wordBank h3 {
     margin-top: .5em;
+    margin-left: .5em;
+    margin-right: .5em;
     display: flex;
     justify-content: center;
 }
@@ -35,6 +39,8 @@
 
 }
 .answersholder p{
+    margin-left: .5em;
+    margin-right: .5em;
     margin-top: .5em;
     margin-bottom: 1px;}
 .row{
@@ -46,5 +52,9 @@ max-width: 95%;
 }
 .btn{ background-color: aqua;
     color: black;}
+.answers but{
+    background-color: aqua;
+    color: black;
+}
     
     

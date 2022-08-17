@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./NounGame.css";
 import SingleButton from "../components/SingleButton";
-import { uuidv4 } from "@firebase/util";
 
 const NounGame = () => {
   const [feedback, setFeedback] = useState(
     "Oops! Try again. Remember, a noun is a person, place, or thing."
   );
+
+  const [noSubmit, setNoSubmit] = useState(
+    "Oops! Take another look. You have not selected all the nouns."
+  );
+  //useEffect load sentence from db, setSentence
   const [fillerSentence, setFillerSentence] = useState([
     { word: "One", isAnswer: false },
     { word: "blue", isAnswer: false },
@@ -17,7 +21,8 @@ const NounGame = () => {
     { word: "branch", isAnswer: true },
   ]);
   const readAloud = () => {};
-  const secondButtonList = fillerSentence.map((pair) => (
+
+  const buttonList = fillerSentence.map((pair) => (
     <SingleButton
       pair={pair}
       word={pair.word}
@@ -26,10 +31,31 @@ const NounGame = () => {
     />
   ));
 
+  const handleSubmit = () => {
+    //if both answers are selected, levelSuccess() else return noSubmit
+    console.log("submitted");
+  };
+  const levelSuccess = () => {
+    //write level isCompleted=true in db, load next level.
+  };
   return (
-    <div className="main">
-      <h1>Select the nouns in the sentence: </h1> <br />
-      <div>{secondButtonList}</div>
+    <div>
+      <div className="main">
+        <h1 onMouseEnter={console.log("header")}>
+          Select the nouns in the sentence:{" "}
+        </h1>{" "}
+        <br />
+        <div>{buttonList}</div>
+      </div>{" "}
+      <button
+        className="submit"
+        onMouseEnter={console.log("submit button")}
+        onClick={() => {
+          handleSubmit();
+        }}
+      >
+        Submit
+      </button>
     </div>
   );
 };

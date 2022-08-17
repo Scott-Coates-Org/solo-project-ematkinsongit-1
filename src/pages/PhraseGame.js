@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "reactstrap";
 import "./PhraseGame.css";
+import SinglePic from "../components/SinglePic";
 
 const PhraseGame = () => {
   const [num, setNum] = useState("");
@@ -20,6 +21,7 @@ const PhraseGame = () => {
     "on the road",
     "beside the sea",
   ];
+  const pathName = "phrasegame/birds.jpeg";
   const colorListItems = fillerColors.map((color) => (
     <Button
       className="bankbtn"
@@ -80,7 +82,7 @@ const PhraseGame = () => {
         </h1>
         <div id="wordAndImg" className="">
           <div className="lvlimg" id="lvlimg">
-            <img src="../assets/kittens.jpeg" alt="kittens" />
+            <SinglePic pathName={pathName} />
           </div>
           <div className="wordBank" id="wordBank">
             <h3>Word Bank</h3>
@@ -88,7 +90,10 @@ const PhraseGame = () => {
           </div>
         </div>
         <div className="answersholder">
-          AnswersHolder
+          <p>
+            Click the category to populate the word bank. Choose the word that
+            describes the image!
+          </p>
           <div
             id="num"
             className="row"
@@ -137,9 +142,14 @@ const PhraseGame = () => {
             <p className="">Where = {where}</p>
           </div>{" "}
         </div>{" "}
-        <p>
+        <p className="answers">
           {" "}
-          Answer: {num} {color} {noun} {verb} {where}
+          Answer:
+          <button className="but">{num}</button>
+          <button className="but">{color}</button>
+          <button className="but">{noun}</button>
+          <button className="but">{verb}</button>
+          <button className="but">{where}</button>
         </p>
         <Button
           onClick={() => {

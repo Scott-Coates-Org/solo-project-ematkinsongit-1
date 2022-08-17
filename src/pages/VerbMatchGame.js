@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { app } from "../firebase/client";
 import "./VerbMatchGame.css";
 import SinglePic from "../components/SinglePic.jsx";
 import SingleVerb from "../components/SingleVerb.jsx";
-import { uuidv4 } from "@firebase/util";
 
 const VerbMatchGame = () => {
   const [draggingID, setDraggingID] = useState("");

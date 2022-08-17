@@ -1,15 +1,17 @@
 import React, {useState} from 'react'
-import { uuidv4 } from '@firebase/util';
 import '../components/SingleButton.css'
 
-const SingleButton = (pair, word, isAnswer) => {
-  const readAloud=()=>{}
+const SingleButton = (pair) => {
+  const [feedback, setFeedback] = useState(
+    "Oops! Try again. Remember, a noun is a person, place, or thing."
+  );
+  const readAloud =()=>{ console.log(pair.word)}
     const [state, setState]= useState(false);
     
     const toggle=()=>{ if (pair.isAnswer===true) {
       setState(!state)
       console.log('correct! ', pair.word, ' is a noun!')
-    } else{console.log('sorry! incorrect')}
+    } else{console.log(feedback)}
 
     }
 const handleMouseEnter=()=>{readAloud(pair.word)}
