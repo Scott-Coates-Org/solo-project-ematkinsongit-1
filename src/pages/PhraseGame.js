@@ -5,12 +5,25 @@ import "./PhraseGame.css";
 import SinglePic from "../components/SinglePic";
 
 const PhraseGame = () => {
+  //useEffect onload, setAnswer()
   const [num, setNum] = useState("");
   const [color, setColor] = useState("");
   const [noun, setNoun] = useState("");
   const [verb, setVerb] = useState("");
   const [where, setWhere] = useState("");
   const [bank, setBank] = useState([]);
+  const [answer, setAnswer] = useState();
+  const [sentence, setSentence] = useState(num + color + noun + verb + where);
+
+  const handleSubmit = () => {
+    if (sentence === answer) {
+      console.log("submitted");
+      //if all sentence = answer, write level isCompleted=true in userProfile, load next level.
+    } else {
+      //else give feedback.
+    }
+  };
+
   const fillerColors = ["red", "yellow", "blue"];
   const fillerNumbers = ["one", "two", "three", "four"];
   const fillerNouns = ["peach", "balloon", "trees", "birds"];
@@ -153,7 +166,7 @@ const PhraseGame = () => {
         </p>
         <Button
           onClick={() => {
-            console.log("submitted");
+            handleSubmit();
           }}
         >
           Submit

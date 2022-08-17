@@ -4,17 +4,23 @@ import SinglePic from "../components/SinglePic.jsx";
 import SingleVerb from "../components/SingleVerb.jsx";
 
 const VerbMatchGame = () => {
+  //useEffect setVerbMatchData onLevelLoad
+  const handleSubmit = () => {
+    //if everything is matched, update UserLevel to isComplete=true in db, show next level
+    //else give feedback
+  };
+  //append verbs to correct div,
   const [draggingID, setDraggingID] = useState("");
   const [dragOverID, setDragOverID] = useState("");
-  const verbMatchData = [
+  const [verbMatchData, setVerbMatchData] = useState([
     { verb: "drink", pathName: "verbmatch/setOne/drink.jpg" },
     { verb: "fly", pathName: "verbmatch/setOne/fly.jpg" },
     { verb: "light", pathName: "verbmatch/setOne/light.jpg" },
     { verb: "jump", pathName: "verbmatch/setOne/jump.jpg" },
     { verb: "run", pathName: "verbmatch/setOne/run.jpg" },
     { verb: "swim", pathName: "verbmatch/setOne/swim.jpg" },
-  ];
-  const renderedVerbMatch = verbMatchData.map((pair) => (
+  ]);
+  const verbBank = verbMatchData.map((pair) => (
     <div
       id={pair.verb}
       onDragStart={(id) => handleDragStart(id)}
@@ -53,20 +59,23 @@ const VerbMatchGame = () => {
     console.log("dragging ID: ", draggingID);
   };
   const handleDragEnd = (e) => {
+    //appendToDiv();
     console.log("drag ended");
   };
   const handleDragOver = (e) => {
     setDragOverID(e.target.id);
     console.log("dragOverID: ", dragOverID);
   };
-  const appendToDiv = () => {};
+  const appendToDiv = () => {
+    //filter correct answer out of word bank
+  };
   return (
     <div className="verbMatch">
       <h3> Match the verb to the correct picture by dragging and dropping.</h3>
       <div className="picturesBox">{renderedPictures}</div>
       <div className="verbsBox">
         <h5>Word Bank: </h5>
-        {renderedVerbMatch}
+        {verbBank}
       </div>
     </div>
   );

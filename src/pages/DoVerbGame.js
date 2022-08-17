@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SinglePic from "../components/SinglePic";
 import "./DoVerbGame.css";
 
 const DoVerbGame = () => {
-  const verbPathName = "/canDo/sweep.jpg";
-  const nounPathName = "/canDo/broom.jpg";
+  //useEffect load level from db, then=> setVerbPathName, setNounPathName, setVerb, setNoun
+  const [logic, setLogic] = useState("");
+  const [verb, setVerb] = useState("sweep");
+  const [noun, setNoun] = useState("broom");
+  const [verbPathName, setVerbPathName] = useState("/canDo/sweep.jpg");
+  const [nounPathName, setNounPathName] = useState("/canDo/broom.jpg");
+  const handleSubmit = () => {
+    if (logic === "verb") {
+      //write level isCompleted=true to userProfile in db, go to next level
+      console.log("you win!");
+    } else {
+      //rejection feedback
+    }
+  };
   return (
     <div className="level">
       <h1>
@@ -18,23 +30,24 @@ const DoVerbGame = () => {
         <div
           className="imgOne"
           onClick={() => {
-            console.log("verb");
+            setLogic("verb");
           }}
         >
           <SinglePic pathName={verbPathName} />
-          <p>Sweep</p>
+          <p>{verb}</p>
         </div>
         <div
           className="imgTwo"
           onClick={() => {
-            console.log("noun");
+            //incorrect feedback
           }}
         >
           {" "}
           <SinglePic pathName={nounPathName} />
-          <p>Broom</p>
+          <p>{noun}</p>
         </div>
       </div>
+      <button onClick={() => handleSubmit()}>submit</button>
     </div>
   );
 };
