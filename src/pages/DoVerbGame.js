@@ -20,7 +20,7 @@ const DoVerbGame = () => {
         setWinner(false);
         setLogic("");
       } else {
-        alert("All levels completed!");
+        alert("All levels completed! Return to Home for different games.");
       }
     }
   };
@@ -38,7 +38,7 @@ const DoVerbGame = () => {
   };
   return (
     <div className="level">
-      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {error && <span>Error: {JSON.stringify(error)}</span>}
       {loading && <span> Document: Loading ...</span>}
       {!loading && value && (
         <div className="level">
@@ -46,6 +46,9 @@ const DoVerbGame = () => {
             {" "}
             Can you <strong>DO</strong> it?{" "}
           </h1>
+          <h3>
+            Select the <strong>verb</strong>.
+          </h3>
 
           <div className="imagesContainer">
             <div
@@ -68,12 +71,12 @@ const DoVerbGame = () => {
               <p>{value.data().noun.Description}</p>
             </div>
           </div>
-          <button onClick={() => handleSubmit()}>submit</button>
+          <button onClick={handleSubmit}>submit</button>
         </div>
       )}
       {winner && (
         <div>
-          <h1>Winner Winner Chicken Dinner! </h1>
+          <h1>Correct! You can move on to the next level. </h1>
           <button onClick={nextLevel}>Next Level</button>
         </div>
       )}
