@@ -14,10 +14,10 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <div className="main">
-      {/* <p>Create an Account: </p>
+      <p>Create an Account: </p>
       <CreateAccount />
       <p>Sign in with Email and Password: </p>
-      <SignIn /> <p>OR</p> <Login /> */}
+      <SignIn /> <p>OR</p> <Login />
       <button className="btn" onClick={() => navigate("/doverbgame")}>
         DoVerbGame
       </button>

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NounGame.css";
 import SingleButton from "../components/SingleButton";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/client";
+import { ReactReduxContext } from "react-redux";
 
 const NounGame = () => {
   const [feedback, setFeedback] = useState(

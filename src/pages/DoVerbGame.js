@@ -1,53 +1,82 @@
 import React, { useState } from "react";
 import SinglePic from "../components/SinglePic";
 import "./DoVerbGame.css";
+import { doc } from "firebase/firestore";
+import { db } from "../firebase/client";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const DoVerbGame = () => {
-  //useEffect load level from db, then=> setVerbPathName, setNounPathName, setVerb, setNoun
+  const [level, setLevel] = useState("LevelOne");
+  const [winner, setWinner] = useState(false);
   const [logic, setLogic] = useState("");
-  const [verb, setVerb] = useState("sweep");
-  const [noun, setNoun] = useState("broom");
-  const [verbPathName, setVerbPathName] = useState("/canDo/sweep.jpg");
-  const [nounPathName, setNounPathName] = useState("/canDo/broom.jpg");
+  const nextLevel = () => {
+    if (level === "LevelOne") {
+      setLevel("LevelTwo");
+      setWinner(false);
+      setLogic("");
+    } else {
+      if (level === "LevelTwo") {
+        setLevel("LevelThree");
+        setWinner(false);
+        setLogic("");
+      } else {
+        alert("All levels completed!");
+      }
+    }
+  };
+
+  //Get LevelDoc from Database
+
+  const [value, loading, error] = useDocument(doc(db, "cando", level));
+
   const handleSubmit = () => {
     if (logic === "verb") {
-      //write level isCompleted=true to userProfile in db, go to next level
-      console.log("you win!");
+      setWinner(true);
     } else {
-      //rejection feedback
+      alert("select the verb.");
     }
   };
   return (
     <div className="level">
-      <h1>
-        Can you <strong>DO</strong> it?
-      </h1>
-      <p>
-        {" "}
-        Select the verb. Which one can you <strong>DO?</strong>
-      </p>
-      <div className="imagesContainer">
-        <div
-          className="imgOne"
-          onClick={() => {
-            setLogic("verb");
-          }}
-        >
-          <SinglePic pathName={verbPathName} />
-          <p>{verb}</p>
+      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {loading && <span> Document: Loading ...</span>}
+      {!loading && value && (
+        <div className="level">
+          <h1>
+            {" "}
+            Can you <strong>DO</strong> it?{" "}
+          </h1>
+
+          <div className="imagesContainer">
+            <div
+              className="imgOne"
+              onClick={() => {
+                setLogic("verb");
+              }}
+            >
+              <SinglePic pathName={value.data().verb.PathName} />
+              <p>{value.data().verb.Description}</p>
+            </div>
+            <div
+              className="imgTwo"
+              onClick={() => {
+                setLogic("");
+              }}
+            >
+              {" "}
+              <SinglePic pathName={value.data().noun.PathName} />
+              <p>{value.data().noun.Description}</p>
+            </div>
+          </div>
+          <button onClick={() => handleSubmit()}>submit</button>
         </div>
-        <div
-          className="imgTwo"
-          onClick={() => {
-            //incorrect feedback
-          }}
-        >
-          {" "}
-          <SinglePic pathName={nounPathName} />
-          <p>{noun}</p>
+      )}
+      {winner && (
+        <div>
+          <h1>Winner Winner Chicken Dinner! </h1>
+          <button onClick={nextLevel}>Next Level</button>
         </div>
-      </div>
-      <button onClick={() => handleSubmit()}>submit</button>
+      )}
     </div>
   );
 };
