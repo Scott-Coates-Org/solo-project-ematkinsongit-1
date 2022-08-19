@@ -9,13 +9,16 @@ const DoVerbGame = () => {
   const [level, setLevel] = useState("LevelOne");
   const [winner, setWinner] = useState(false);
   const [logic, setLogic] = useState("");
+  const [style, setStyle] = useState("imgOne");
   const nextLevel = () => {
     if (level === "LevelOne") {
       setLevel("LevelTwo");
+      setStyle("imgOne");
       setWinner(false);
       setLogic("");
     } else {
       if (level === "LevelTwo") {
+        setStyle("imgOne");
         setLevel("LevelThree");
         setWinner(false);
         setLogic("");
@@ -36,6 +39,10 @@ const DoVerbGame = () => {
       alert("select the verb.");
     }
   };
+  const handleVerbClick = () => {
+    setStyle("selected");
+    setLogic("verb");
+  };
   return (
     <div className="level">
       {error && <span>Error: {JSON.stringify(error)}</span>}
@@ -52,9 +59,9 @@ const DoVerbGame = () => {
 
           <div className="imagesContainer">
             <div
-              className="imgOne"
+              className={style}
               onClick={() => {
-                setLogic("verb");
+                handleVerbClick();
               }}
             >
               <SinglePic pathName={value.data().verb.PathName} />

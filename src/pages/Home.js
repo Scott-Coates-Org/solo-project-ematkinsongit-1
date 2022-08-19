@@ -3,11 +3,6 @@ import { useNavigate } from "react-router-dom";
 import CreateAccount from "../components/login/CreateAccount";
 import Login from "../components/login/Login";
 import SignIn from "../components/login/SignIn";
-import SingleButton from "../components/SingleButton";
-import DoVerbGame from "./DoVerbGame";
-import NounGame from "./NounGame";
-import PhraseGame from "./PhraseGame";
-import VerbMatchGame from "./VerbMatchGame";
 import "./Home.css";
 
 const Home = () => {

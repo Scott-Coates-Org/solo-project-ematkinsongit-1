@@ -11,6 +11,13 @@
     border-radius: 4px;
     margin: .5em;}
     .imgOne p{margin-left: .5em;}
+    .selected{
+        background-color: yellowgreen;
+        border: 1px solid gray;
+        border-radius: 4px;
+        margin: .5em;
+    }
+    .selected p{margin-left: .5em;}
 .imgTwo{
     background-color: rgb(225, 250, 250);
     border: 1px solid gray;
