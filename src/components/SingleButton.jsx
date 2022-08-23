@@ -1,29 +1,35 @@
 import React, {useState} from 'react'
 import '../components/SingleButton.css'
 
-const SingleButton = (pair) => {
-  const [feedback, setFeedback] = useState(
+const SingleButton = ({pair, word, isAnswer, toggle}) => {
+  const [disable, setDisable]=useState(false);
+  const [feedback, setFeedback] = useState( 
     "Oops! Try again. Remember, a noun is a person, place, or thing."
   );
-  const readAloud =()=>{ console.log(pair.word)}
-    const [state, setState]= useState(false);
-    
-    const toggle=()=>{ if (pair.isAnswer===true) {
-      setState(!state)
-      console.log('correct! ', pair.word, ' is a noun!')
-    } else{console.log(feedback)}
 
-    }
-const handleMouseEnter=()=>{readAloud(pair.word)}
+
+  const readAloud =()=>{
+   
+  //  console.log(word)
+  }
+    // const toggle=()=>{ if (isAnswer===true) {
+    //   setState(!state) 
+    //   setDisable(true);
+    //   console.log('correct! ', word, ' is a noun!')
+    // } else{alert(feedback)}
+
+    // }
+const handleMouseEnter=()=>{readAloud(word)}
   return (
-    <button onClick={()=>{toggle(pair)}}
-    className={'toggle--button ' + (state ? 'toggle--close':'')}
+    <button onClick={()=>{toggle({isAnswer, disable, setDisable})}}
+    className={'toggle--button ' + (disable ? 'toggle--close':'')}
+    disabled={disable}
     
     
     onMouseEnter={()=>{handleMouseEnter(pair)}}
     
     
-    >{pair.word}</button>
+    >{word}</button>
   )
 }
 
