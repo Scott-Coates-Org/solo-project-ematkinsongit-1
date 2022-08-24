@@ -1,41 +1,119 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "reactstrap";
 import "./PhraseGame.css";
 import SinglePic from "../components/SinglePic";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/client";
 
 const PhraseGame = () => {
   //useEffect onload, setAnswer()
+  const [pathName, setPathName] = useState("phrasegame/birds.jpeg");
+  const [colors, setColors] = useState([]);
+  const [numbers, setNumbers] = useState([]);
+  const [nouns, setNouns] = useState([]);
+  const [verbs, setVerbs] = useState([]);
+  const [wheres, setWheres] = useState([]);
   const [num, setNum] = useState("");
   const [color, setColor] = useState("");
   const [noun, setNoun] = useState("");
   const [verb, setVerb] = useState("");
   const [where, setWhere] = useState("");
   const [bank, setBank] = useState([]);
-  const [answer, setAnswer] = useState();
-  const [sentence, setSentence] = useState(num + color + noun + verb + where);
+  const [answer, setAnswer] = useState([]);
+  const [sentence, setSentence] = useState([num, color, noun, verb, where]);
+  const [level, setLevel] = useState("LevelOne");
+  const [winner, setWinner] = useState(false);
+  const navigate = useNavigate();
 
+  const arraysEqual = (sentence, answer) => {
+    console.log("running arrays equal");
+    let a = JSON.stringify(sentence);
+    let b = JSON.stringify(answer);
+    if (a === b) {
+      setWinner(true);
+    } else {
+      setWinner(false);
+    }
+  };
   const handleSubmit = () => {
-    if (sentence === answer) {
+    console.log("running handlesubmit");
+    arraysEqual();
+    if (winner === true) {
       console.log("submitted");
+      console.log("winner: ", winner);
+      nextLevel();
       //if all sentence = answer, write level isCompleted=true in userProfile, load next level.
     } else {
+      alert("no sub");
+      console.log("winner: ", winner);
+      console.log("incorrect");
+      console.log("answer: ", answer);
+      console.log("sentence: ", sentence);
       //else give feedback.
     }
   };
+  const nextLevel = () => {
+    if (level === "LevelOne") {
+      setLevel("LevelTwo");
+      reset();
+    } else {
+      if (level === "LevelTwo") {
+        setLevel("LevelThree");
+        reset();
+      } else {
+        alert("All levels completed. Returning home.");
+        navigate("/");
+      }
+    }
+  };
+  const reset = () => {
+    setWinner(false);
+    setNum("");
+    setColor("");
+    setNoun("");
+    setVerb("");
+    setWhere("");
+    setBank(numberListItems);
+  };
 
-  const fillerColors = ["red", "yellow", "blue"];
-  const fillerNumbers = ["one", "two", "three", "four"];
-  const fillerNouns = ["peach", "balloon", "trees", "birds"];
-  const fillerVerbs = ["running", "jumping", "floating", "peeing"];
-  const fillerWhere = [
-    "in a tree",
-    "in the sky",
-    "on the road",
-    "beside the sea",
-  ];
-  const pathName = "phrasegame/birds.jpeg";
-  const colorListItems = fillerColors.map((color) => (
+  const docRef = doc(db, "phraseGame", level);
+  useEffect(() => {
+    const getDataFromDB = async () => {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const colorsRes = docSnap.data().Colors;
+        const numbersRes = docSnap.data().Numbers;
+        const nounsRes = docSnap.data().Nouns;
+        const verbsRes = docSnap.data().Verbs;
+        const wheresRes = docSnap.data().Wheres;
+        const pathNamRes = docSnap.data().PhotoPathName;
+        const answerRes = docSnap.data().Answer;
+        setColors(colorsRes);
+        setNumbers(numbersRes);
+        setNouns(nounsRes);
+        setVerbs(verbsRes);
+        setWheres(wheresRes);
+        setPathName(pathNamRes);
+        setAnswer(answerRes);
+        setBank(numberListItems);
+      } else {
+        console.log("no data");
+      }
+    };
+
+    getDataFromDB();
+    console.log(answer);
+  }, [level]);
+  useEffect(() => {
+    const updateAnswer = () => {
+      const newSent = [num, color, noun, verb, where];
+      setSentence(newSent);
+    };
+    updateAnswer();
+  }, [color, num, noun, verb, where]);
+
+  const colorListItems = colors.map((color) => (
     <Button
       className="bankbtn"
       key={color}
@@ -45,7 +123,7 @@ const PhraseGame = () => {
       {color}
     </Button>
   ));
-  const numberListItems = fillerNumbers.map((num) => (
+  const numberListItems = numbers.map((num) => (
     <Button
       className="bankbtn"
       key={num}
@@ -55,7 +133,7 @@ const PhraseGame = () => {
       {num}
     </Button>
   ));
-  const nounListItems = fillerNouns.map((noun) => (
+  const nounListItems = nouns.map((noun) => (
     <Button
       className="bankbtn"
       key={noun}
@@ -65,7 +143,7 @@ const PhraseGame = () => {
       {noun}
     </Button>
   ));
-  const verbListItems = fillerVerbs.map((verb) => (
+  const verbListItems = verbs.map((verb) => (
     <Button
       className="bankbtn"
       key={verb}
@@ -75,7 +153,7 @@ const PhraseGame = () => {
       {verb}
     </Button>
   ));
-  const whereListItems = fillerWhere.map((where) => (
+  const whereListItems = wheres.map((where) => (
     <Button
       className="bankbtn"
       key={where}
@@ -91,8 +169,16 @@ const PhraseGame = () => {
       <div className="level">
         <h1>
           Click the category and select the correct word from the wordbank.
-          Generate a phrase that matches the prompt.
+          Generate a phrase that matches the prompt. winner: {answer} Level:{" "}
+          {level}
         </h1>
+        <button
+          onClick={() => {
+            setWinner(true);
+          }}
+        >
+          Winner
+        </button>
         <div id="wordAndImg" className="">
           <div className="lvlimg" id="lvlimg">
             <SinglePic pathName={pathName} />

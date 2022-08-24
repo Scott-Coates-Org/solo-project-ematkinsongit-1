@@ -4,8 +4,10 @@ import "./DoVerbGame.css";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase/client";
 import { useDocument } from "react-firebase-hooks/firestore";
+import { useNavigate } from "react-router-dom";
 
 const DoVerbGame = () => {
+  const navigate = useNavigate();
   const [level, setLevel] = useState("LevelOne");
   const [winner, setWinner] = useState(false);
   const [logic, setLogic] = useState("");
@@ -23,7 +25,8 @@ const DoVerbGame = () => {
         setWinner(false);
         setLogic("");
       } else {
-        alert("All levels completed! Return to Home for different games.");
+        alert("All levels completed! Returning to home.");
+        navigate("/");
       }
     }
   };

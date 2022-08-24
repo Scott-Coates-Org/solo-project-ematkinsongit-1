@@ -49,12 +49,12 @@ const NounGame = () => {
 
   const readAloud = () => {};
 
-  const toggle = ({ isAnswer, disable, setDisable }) => {
+  const toggle = ({ isAnswer, disable, setDisable, feedback }) => {
     if (isAnswer === true) {
       setDisable(!disable);
       setCount(count + 1);
     } else {
-      console.log("sorry, incorrect");
+      console.log(feedback);
     }
   };
 

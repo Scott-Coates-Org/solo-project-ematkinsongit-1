@@ -12,16 +12,10 @@ const SingleButton = ({pair, word, isAnswer, toggle}) => {
    
   //  console.log(word)
   }
-    // const toggle=()=>{ if (isAnswer===true) {
-    //   setState(!state) 
-    //   setDisable(true);
-    //   console.log('correct! ', word, ' is a noun!')
-    // } else{alert(feedback)}
-
-    // }
+   
 const handleMouseEnter=()=>{readAloud(word)}
   return (
-    <button onClick={()=>{toggle({isAnswer, disable, setDisable})}}
+    <button onClick={()=>{toggle({isAnswer, disable, setDisable, feedback})}}
     className={'toggle--button ' + (disable ? 'toggle--close':'')}
     disabled={disable}
     
