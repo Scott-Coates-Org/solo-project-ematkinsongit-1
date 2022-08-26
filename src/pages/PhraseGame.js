@@ -7,7 +7,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/client";
 
 const PhraseGame = () => {
-  //useEffect onload, setAnswer()
   const [pathName, setPathName] = useState("phrasegame/birds.jpeg");
   const [colors, setColors] = useState([]);
   const [numbers, setNumbers] = useState([]);
@@ -27,23 +26,21 @@ const PhraseGame = () => {
   const navigate = useNavigate();
 
   const arraysEqual = (sentence, answer) => {
-    console.log("running arrays equal");
-    let a = JSON.stringify(sentence);
-    let b = JSON.stringify(answer);
-    if (a === b) {
-      setWinner(true);
-    } else {
-      setWinner(false);
+    for (let index = 0; index < sentence.length; index++) {
+      if (sentence[index] != answer[index]) {
+        return false;
+      } else {
+        return true;
+      }
     }
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("running handlesubmit");
-    arraysEqual();
-    if (winner === true) {
+    const isEqual = await arraysEqual();
+    if (isEqual === true) {
       console.log("submitted");
       console.log("winner: ", winner);
       nextLevel();
-      //if all sentence = answer, write level isCompleted=true in userProfile, load next level.
     } else {
       alert("no sub");
       console.log("winner: ", winner);
