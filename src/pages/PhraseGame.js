@@ -20,19 +20,20 @@ const PhraseGame = () => {
   const [where, setWhere] = useState("");
   const [bank, setBank] = useState([]);
   const [answer, setAnswer] = useState([]);
-  const [sentence, setSentence] = useState([num, color, noun, verb, where]);
+  const sentence = [num, color, noun, verb, where];
   const [level, setLevel] = useState("LevelOne");
   const [winner, setWinner] = useState(false);
   const navigate = useNavigate();
 
   const arraysEqual = () => {
-    console.log("running arrays equal");
-    let a = JSON.stringify(sentence);
-    let b = JSON.stringify(answer);
-    console.log("a: ", a);
-    console.log("b: ", b);
-    if (a === b) {
-      setWinner(true);
+    if (sentence.length === answer.length) {
+      setWinner(
+        sentence.every((word, index) => {
+          console.log(word);
+          console.log(answer[index]);
+          return word === answer[index];
+        })
+      );
     } else {
       setWinner(false);
     }
@@ -104,13 +105,6 @@ const PhraseGame = () => {
 
     getDataFromDB();
   }, [level]);
-  useEffect(() => {
-    const updateAnswer = () => {
-      const newSent = [num, color, noun, verb, where];
-      setSentence(newSent);
-    };
-    updateAnswer();
-  }, [color, num, noun, verb, where]);
 
   const colorListItems = colors.map((color) => (
     <Button
