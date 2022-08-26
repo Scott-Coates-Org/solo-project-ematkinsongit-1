@@ -25,26 +25,29 @@ const PhraseGame = () => {
   const [winner, setWinner] = useState(false);
   const navigate = useNavigate();
 
-  const arraysEqual = (sentence, answer) => {
-    for (let index = 0; index < sentence.length; index++) {
-      if (sentence[index] != answer[index]) {
-        return false;
-      } else {
-        return true;
-      }
+  const arraysEqual = () => {
+    console.log("running arrays equal");
+    let a = JSON.stringify(sentence);
+    let b = JSON.stringify(answer);
+    console.log("a: ", a);
+    console.log("b: ", b);
+    if (a === b) {
+      setWinner(true);
+    } else {
+      setWinner(false);
     }
   };
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     console.log("running handlesubmit");
-    const isEqual = await arraysEqual();
-    if (isEqual === true) {
+    arraysEqual(sentence, answer);
+    if (winner === true) {
       console.log("submitted");
       console.log("winner: ", winner);
       nextLevel();
     } else {
       alert("no sub");
       console.log("winner: ", winner);
-      console.log("incorrect");
+
       console.log("answer: ", answer);
       console.log("sentence: ", sentence);
       //else give feedback.
@@ -100,7 +103,6 @@ const PhraseGame = () => {
     };
 
     getDataFromDB();
-    console.log(answer);
   }, [level]);
   useEffect(() => {
     const updateAnswer = () => {
