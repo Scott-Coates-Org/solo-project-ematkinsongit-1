@@ -27,21 +27,16 @@ const PhraseGame = () => {
 
   const arraysEqual = () => {
     if (sentence.length === answer.length) {
-      setWinner(
-        sentence.every((word, index) => {
-          console.log(word);
-          console.log(answer[index]);
-          return word === answer[index];
-        })
-      );
+      return sentence.every((word, index) => word === answer[index]);
     } else {
-      setWinner(false);
+      return false;
     }
   };
   const handleSubmit = () => {
     console.log("running handlesubmit");
-    arraysEqual(sentence, answer);
-    if (winner === true) {
+    const arraysAreEqual = arraysEqual(sentence, answer);
+    setWinner(arraysAreEqual);
+    if (arraysAreEqual) {
       console.log("submitted");
       console.log("winner: ", winner);
       nextLevel();
